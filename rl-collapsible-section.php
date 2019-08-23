@@ -9,8 +9,16 @@ defined( 'ABSPATH' ) OR exit;
  * Version: 0.0.1
  */
 
-function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '')
-{
+function rl_collapsible_section_register_scripts() {
+  wp_register_style( 'rl-collapsible-section-style', plugin_dir_url( __FILE__ ).'/css/rl-collapsible-section.css', array(), '0.0.1' );
+  wp_register_script( 'rl-collapsible-section-js', plugin_dir_url( __FILE__ ).'/js/rl-collapsible-section.js', array('jquery'), '0.0.1', true );
+}
+add_action( 'wp_enqueue_scripts', 'rl_collapsible_section_register_scripts' );
+
+function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '') {
+  wp_enqueue_script( 'rl-collapsible-section-js' );
+  wp_enqueue_style( 'rl-collapsible-section-style' );
+
   // normalize attribute keys, lowercase
   $attrs = array_change_key_case((array)$attrs, CASE_LOWER);
  
