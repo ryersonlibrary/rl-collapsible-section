@@ -6,5 +6,8 @@ Adds the [rl_collapsible_section] shortcode to WordPress.
 2. That's it!
 
 ## Usage
-### `[rl_collapsible_section title="Collapsible section" title-tag="h1"]` shortcode
+### `[rl_collapsible_section][/rl_collapsible_section]` shortcode
+
+Example usage: `[rl_collapsible_section title="Collapsible section" title-tag="h1"]Collapsible section content[/rl_collapsible_section]`
+
 Outputs the collapsible content. Parameters are optional, defaults shown.
