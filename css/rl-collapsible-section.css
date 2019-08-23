@@ -1,9 +1,39 @@
 .rl-collapsible-section-title {
   text-decoration: underline;
+  margin-top: 0;
+}
+
+.rl-collapsible-section-title button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  padding: inherit;
+  text-align: left;
+  text-decoration: inherit;
+}
+
+.rl-collapsible-section-button-indicator:after {
+  position: absolute;
+  right: 0;
+  content: "+";
+}
+
+.rl-collapsed .rl-collapsible-section-button-indicator:after {
+  content: "\2014";
 }
 
 .rl-collapsible-section-title:hover,
 .rl-collapsible-section-title:focus {
   color: #002D72;
-  cursor: pointer;
+}
+
+.rl-collapsible-section-content {
+  transition: height 0.3s ease-in-out;
+  height: auto;
+  overflow: hidden;
+}
+
+.rl-collapsed .rl-collapsible-section-content {
+  height: 0!important;
 }
