@@ -1,0 +1,9 @@
+.rl-collapsible-section-title {
+  text-decoration: underline;
+}
+
+.rl-collapsible-section-title:hover,
+.rl-collapsible-section-title:focus {
+  color: #002D72;
+  cursor: pointer;
+}
