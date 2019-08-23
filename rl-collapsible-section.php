@@ -7,12 +7,12 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Adds the [rl_collapsible_section] shortcode to WordPress.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/custom-css-stylesheet-for-posts-or-pages
- * Version: 0.0.1
+ * Version: 0.0.2
  */
 
 function rl_collapsible_section_register_scripts() {
-  wp_register_style( 'rl-collapsible-section-style', plugin_dir_url( __FILE__ ).'/css/rl-collapsible-section.css', array(), '0.0.1' );
-  wp_register_script( 'rl-collapsible-section-js', plugin_dir_url( __FILE__ ).'/js/rl-collapsible-section.js', array('jquery'), '0.0.1', true );
+  wp_register_style( 'rl-collapsible-section-style', plugin_dir_url( __FILE__ ).'/css/rl-collapsible-section.css', array(), '0.0.2' );
+  wp_register_script( 'rl-collapsible-section-js', plugin_dir_url( __FILE__ ).'/js/rl-collapsible-section.js', array('jquery'), '0.0.2', true );
 }
 add_action( 'wp_enqueue_scripts', 'rl_collapsible_section_register_scripts' );
 
@@ -34,7 +34,7 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
 
   $output = "<div class=\"rl-collapsible-section\">";
   $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>$title<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
-  $output .= "<div class=\"rl-collapsible-section-content\">{$content}</div>";
+  $output .= "<p class=\"rl-collapsible-section-content\">{$content}</p>";
   $output .= "</div>";
 
   return do_shortcode($output);
