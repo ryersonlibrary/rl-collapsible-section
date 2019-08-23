@@ -1,4 +1,5 @@
 .rl-collapsible-section-title {
+  position: relative;
   text-decoration: underline;
 }
 
