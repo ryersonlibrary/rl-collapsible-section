@@ -16,11 +16,11 @@
 .rl-collapsible-section-button-indicator:after {
   position: absolute;
   right: 0;
-  content: "+";
+  content: "\2014";
 }
 
 .rl-collapsed .rl-collapsible-section-button-indicator:after {
-  content: "\2014";
+  content: "+";
 }
 
 .rl-collapsible-section-title:hover,
