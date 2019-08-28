@@ -26,14 +26,21 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
   // override default attributes with user attributes
   $shortcode_attrs = shortcode_atts([
     'title' => 'Collapsible section',
-    'title-tag' => 'h1'
+    'title-tag' => 'h1',
+    'collapsed' => 'yes'
   ], $attrs, $tag);
 
   $title = $shortcode_attrs['title'];
   $title_tag = $shortcode_attrs['title-tag'];
+  $collapsed = $shortcode_attrs['collapsed'] == 'yes';
+  
+  $classes = '';
+  if ($collapsed) {
+    $classes = 'rl-collapsed';
+  }
 
-  $output = "<div class=\"rl-collapsible-section\">";
-  $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>$title<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
+  $output = "<div class=\"rl-collapsible-section {$classes}\">";
+  $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
   $output .= "<p class=\"rl-collapsible-section-content\">{$content}</p>";
   $output .= "</div>";
 
