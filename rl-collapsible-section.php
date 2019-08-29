@@ -41,7 +41,7 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
 
   $output = "<div class=\"rl-collapsible-section {$classes}\">";
   $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
-  $output .= "<p class=\"rl-collapsible-section-content\">{$content}</p>";
+  $output .= "<div class=\"rl-collapsible-section-content\">{$content}</div>";
   $output .= "</div>";
 
   return do_shortcode($output);
