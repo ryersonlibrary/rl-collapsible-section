@@ -29,10 +29,9 @@
 }
 
 .rl-collapsible-section-content {
-  height: auto;
-  overflow: hidden;
+  display: block;
 }
 
 .rl-collapsed .rl-collapsible-section-content {
-  height: 0!important;
+  display: none;
 }
