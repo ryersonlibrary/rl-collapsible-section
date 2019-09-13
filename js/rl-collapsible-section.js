@@ -10,6 +10,11 @@ jQuery(document).ready( function( jQuery ){
 
     _$(titleButton).on('click', function() {
       _$(this).closest('.rl-collapsible-section').toggleClass('rl-collapsed');
+
+      // toggle the aria-expanded attribute on the button
+      _$(this).attr('aria-expanded', function (i, attr) {
+        return attr == 'true' ? 'false' : 'true'
+      });
     });
   });
 });

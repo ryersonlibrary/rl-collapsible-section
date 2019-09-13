@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Adds the [rl_collapsible_section] shortcode to WordPress.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rl-collapsible-section
- * Version: 0.0.7
+ * Version: 0.0.8
  */
 
 function rl_collapsible_section_register_scripts() {
@@ -34,13 +34,15 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
   $title_tag = $shortcode_attrs['title-tag'];
   $collapsed = $shortcode_attrs['collapsed'] == 'yes';
   
-  $collapsible_section_classes = '';
+  $collapsible_section_classes = '';  
+  $aria_expanded = 'true';
   if ($collapsed) {
+    $aria_expanded = 'false';
     $collapsible_section_classes = 'rl-collapsed';
   }
 
   $output = "<div class=\"rl-collapsible-section {$collapsible_section_classes}\">";
-  $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
+  $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button aria-expanded=\"{$aria_expanded}\">{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
   $output .= "<div class=\"rl-collapsible-section-content\">{$content}</div>";
   $output .= "</div>";
 
