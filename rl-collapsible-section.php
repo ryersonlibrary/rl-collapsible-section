@@ -34,12 +34,12 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
   $title_tag = $shortcode_attrs['title-tag'];
   $collapsed = $shortcode_attrs['collapsed'] == 'yes';
   
-  $classes = '';
+  $collapsible_section_classes = '';
   if ($collapsed) {
-    $classes = 'rl-collapsed';
+    $collapsible_section_classes = 'rl-collapsed';
   }
 
-  $output = "<div class=\"rl-collapsible-section {$classes}\">";
+  $output = "<div class=\"rl-collapsible-section {$collapsible_section_classes}\">";
   $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button>{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
   $output .= "<div class=\"rl-collapsible-section-content\">{$content}</div>";
   $output .= "</div>";
