@@ -5,6 +5,7 @@
 }
 
 .rl-collapsible-section-title button {
+  color: #EFEFEF;
   background: none;
   border: 0;
   color: inherit;
@@ -25,7 +26,7 @@
 .rl-collapsible-section-button-indicator {
   position: absolute;
   right: 1rem;
-  top: calc(50% - 1rem);
+  top: calc(50% - 1.5rem);
 }
 
 .rl-collapsible-section-button-indicator:after {
