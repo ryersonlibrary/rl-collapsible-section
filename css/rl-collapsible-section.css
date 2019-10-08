@@ -1,6 +1,7 @@
 .rl-collapsible-section-title {
   position: relative;
   text-decoration: underline;
+  color: #EFEFEF;
 }
 
 .rl-collapsible-section-title button {
@@ -11,21 +12,28 @@
   padding: inherit;
   text-align: left;
   text-decoration: inherit;
+  width:100%;
+  padding: 1rem 2rem;
+  background-color: #0a4e99;
+}
+
+.rl-collapsible-section-title button:hover,
+.rl-collapsible-section-title button:focus {
+  background-color: #7F0C07;
+}
+
+.rl-collapsible-section-button-indicator {
+  position: absolute;
+  right: 1rem;
+  top: calc(50% - 1rem);
 }
 
 .rl-collapsible-section-button-indicator:after {
-  position: absolute;
-  right: 0;
   content: "\2014";
 }
 
 .rl-collapsed .rl-collapsible-section-button-indicator:after {
   content: "+";
-}
-
-.rl-collapsible-section-title:hover,
-.rl-collapsible-section-title:focus {
-  color: #002D72;
 }
 
 .rl-collapsible-section-content {
