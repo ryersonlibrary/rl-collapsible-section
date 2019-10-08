@@ -5,10 +5,9 @@
 }
 
 .rl-collapsible-section-title button {
-  color: #EFEFEF;
   background: none;
   border: 0;
-  color: inherit;
+  color: #EFEFEF;
   cursor: pointer;
   padding: inherit;
   text-align: left;
