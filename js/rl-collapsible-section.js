@@ -38,4 +38,34 @@ jQuery(document).ready( function( jQuery ){
       _$(titleButton).attr('aria-expanded', 'true');
     }
   }
+
+  function collapseCollapsible(collapsible) {
+    _$collapsible = _$(collapsible);
+    if ( !_$collapsible.hasClass('rl-collapsed') ) {
+      _$collapsible.addClass('rl-collapsed');
+      var titleButton = _$collapsible.find('.rl-collapsible-section-title button')[0];
+      _$(titleButton).attr('aria-expanded', 'false');
+    }
+  }
+  
+  _$('.rl-collapsible-section-toggle-button').on('click', function() {
+    var expanded = _$(this).data('toggle-expanded');
+    if (expanded) {
+      // collapse all sections
+      _$('.rl-collapsible-section').each(function() {
+        collapseCollapsible(this);
+      });
+    } else {
+      // expand all sections
+      _$('.rl-collapsible-section').each(function() {
+        expandCollapsible(this);
+      });
+    }
+
+    // toggle the data attribute on all toggle buttons
+    _$('.rl-collapsible-section-toggle-button').each(function() {
+      var expanded = _$(this).data('toggle-expanded');
+      _$(this).data('toggle-expanded', !expanded);
+    });
+  });
 });

@@ -49,3 +49,9 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
   return do_shortcode($output);
 }
 add_shortcode('rl_collapsible_section', 'rl_collapsible_section_shortcode');
+
+function rl_collapsible_section_toggle_button_shortcode() {
+  $output = '<button class="rl-collapsible-section-toggle-button">Expand / Collapse All</button>';
+  return $output;
+}
+add_shortcode('rl_collapsible_section_toggle_button', 'rl_collapsible_section_toggle_button_shortcode');
