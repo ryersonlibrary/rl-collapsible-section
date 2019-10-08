@@ -17,4 +17,25 @@ jQuery(document).ready( function( jQuery ){
       });
     });
   });
+
+  // Automatically expand a collapsible when internally linking to 
+  // an element within it.
+  _$('a').on('click', function(e) {
+    var windowUri = window.location.href.split("#")[0];
+    var linkUri = this.href.split('#')[0];
+    
+    if ( linkUri.indexOf( windowUri ) > -1 ) {
+      var collapsible =  _$(this.hash).closest('.rl-collapsible-section');
+      expandCollapsible(collapsible);
+    }
+  });
+
+  function expandCollapsible(collapsible) {
+    _$collapsible = _$(collapsible);
+    if ( _$collapsible.hasClass('rl-collapsed') ) {
+      _$collapsible.removeClass('rl-collapsed');
+      var titleButton = _$collapsible.find('.rl-collapsible-section-title button')[0];
+      _$(titleButton).attr('aria-expanded', 'true');
+    }
+  }
 });
