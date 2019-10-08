@@ -55,3 +55,11 @@ function rl_collapsible_section_toggle_button_shortcode() {
   return $output;
 }
 add_shortcode('rl_collapsible_section_toggle_button', 'rl_collapsible_section_toggle_button_shortcode');
+
+function rl_collapsible_section_prepend_toggle_button($content) {
+  if ( has_shortcode($content, 'rl_collapsible_section') && !has_shortcode($content, 'rl_collapsible_section_toggle_button') ) {
+    return '[rl_collapsible_section_toggle_button]' . $content;
+  }
+  return $content;
+}
+add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
