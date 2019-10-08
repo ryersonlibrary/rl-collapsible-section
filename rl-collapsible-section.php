@@ -62,4 +62,4 @@ function rl_collapsible_section_prepend_toggle_button($content) {
   }
   return $content;
 }
-add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
+// add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
