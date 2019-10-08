@@ -11,3 +11,9 @@ Adds the [rl_collapsible_section] shortcode to WordPress.
 Example usage: `[rl_collapsible_section title="Collapsible section" title-tag="h1" collapsed="yes"]Collapsible section content[/rl_collapsible_section]`
 
 Outputs the collapsible content. Parameters are optional, defaults shown.
+
+### `[rl_collapsible_section_toggle_button]` shortcode
+
+Example usage: `[rl_collapsible_section_toggle_button]`
+
+Outputs an expand/collapse all button.
