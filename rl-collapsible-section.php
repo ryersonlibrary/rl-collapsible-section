@@ -10,6 +10,9 @@ defined( 'ABSPATH' ) OR exit;
  * Version: 0.1.5
  */
 
+// Include our custom settings page for the plugin
+require_once plugin_dir_path( __FILE__ ).'/inc/rl-collapsible-section-settings.php';
+
 // Register styles and scripts to be used later when needed
 function rl_collapsible_section_register_scripts() {
   wp_register_style( 'rl-collapsible-section-style', plugin_dir_url( __FILE__ ).'/css/rl-collapsible-section.css', array(), '0.0.7' );
@@ -29,7 +32,7 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
   // override default attributes with user attributes
   $shortcode_atts = shortcode_atts([
     'title' => 'Collapsible section',
-    'title-tag' => 'h1',
+    'title-tag' => esc_attr( get_option( 'rl_collapsible_section-default_title_tag', 'h2' ) ),
     'collapsed' => 'yes'
   ], $atts, 'rl_collapsible_section');
 
@@ -38,9 +41,9 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
   $collapsed = $shortcode_atts['collapsed'] == 'yes';
 
   // Forces the first collapsible section to be expanded
-  if ($rl_collapsible_section_first_instance) {
+  $expand_first_collapsible = esc_attr( get_option( 'rl_collapsible_section-expand_first_collapsible', true ) );
+  if ($rl_collapsible_section_first_instance && $expand_first_collapsible) {
     $collapsed = false;
-    $rl_collapsible_section_first_instance = false;
   }
   
   $collapsible_section_classes = '';  
@@ -54,6 +57,9 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
   $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button aria-expanded=\"{$aria_expanded}\">{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
   $output .= "<div class=\"rl-collapsible-section-content\">{$content}</div>";
   $output .= "</div>";
+
+  // Flag for determining if this is the first instance of [rl_collapsible_section]
+  $rl_collapsible_section_first_instance = false;
 
   return do_shortcode($output);
 }
