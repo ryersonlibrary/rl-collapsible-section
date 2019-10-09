@@ -10,29 +10,28 @@ defined( 'ABSPATH' ) OR exit;
  * Version: 0.1.3
  */
 
+// Register styles and scripts to be used later when needed
 function rl_collapsible_section_register_scripts() {
   wp_register_style( 'rl-collapsible-section-style', plugin_dir_url( __FILE__ ).'/css/rl-collapsible-section.css', array(), '0.0.7' );
   wp_register_script( 'rl-collapsible-section-js', plugin_dir_url( __FILE__ ).'/js/rl-collapsible-section.js', array('jquery'), '0.0.7', true );
 }
 add_action( 'wp_enqueue_scripts', 'rl_collapsible_section_register_scripts' );
 
-function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '') {
-  wp_enqueue_script( 'rl-collapsible-section-js' );
-  wp_enqueue_style( 'rl-collapsible-section-style' );
-
+// [rl_collapsible_section] shortcode
+function rl_collapsible_section_shortcode($atts = [], $content = null) {
   // normalize attribute keys, lowercase
-  $attrs = array_change_key_case((array)$attrs, CASE_LOWER);
+  $atts = array_change_key_case((array)$atts, CASE_LOWER);
  
   // override default attributes with user attributes
-  $shortcode_attrs = shortcode_atts([
+  $shortcode_atts = shortcode_atts([
     'title' => 'Collapsible section',
     'title-tag' => 'h1',
     'collapsed' => 'yes'
-  ], $attrs, $tag);
+  ], $atts, 'rl_collapsible_section');
 
-  $title = $shortcode_attrs['title'];
-  $title_tag = $shortcode_attrs['title-tag'];
-  $collapsed = $shortcode_attrs['collapsed'] == 'yes';
+  $title = $shortcode_atts['title'];
+  $title_tag = $shortcode_atts['title-tag'];
+  $collapsed = $shortcode_atts['collapsed'] == 'yes';
   
   $collapsible_section_classes = '';  
   $aria_expanded = 'true';
@@ -50,18 +49,29 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
 }
 add_shortcode('rl_collapsible_section', 'rl_collapsible_section_shortcode');
 
+// [rl_collapsible_section_toggle_button] shortcode
 function rl_collapsible_section_toggle_button_shortcode() {
   $output = '<div style="text-align: right"><button class="rl-collapsible-section-toggle-button">Expand / Collapse All</button></div>';
   return $output;
 }
 add_shortcode('rl_collapsible_section_toggle_button', 'rl_collapsible_section_toggle_button_shortcode');
 
-function rl_collapsible_section_prepend_toggle_button($content) {
-  if ( has_shortcode($content, 'rl_collapsible_section') && !has_shortcode($content, 'rl_collapsible_section_toggle_button') ) {
-    $before = stristr($content, '[rl_collapsible_section', true);    
-    $after = stristr($content, '[rl_collapsible_section');   
-    return $before . '[rl_collapsible_section_toggle_button]' . $after;
+// Magic.
+function rl_collapsible_section_the_content_filter($content) {
+  if ( has_shortcode( $content, 'rl_collapsible_section') ) {
+    // Enqueue styles and scripts only if the shortcode exists
+    wp_enqueue_script( 'rl-collapsible-section-js' );
+    wp_enqueue_style( 'rl-collapsible-section-style' );
+
+    // Check if the toggle button is manually placed in the content,
+    // if not prepend it to the first instance of [rl_collapsible_section]
+    if ( !has_shortcode($content, 'rl_collapsible_section_toggle_button') ) {
+      $before = stristr($content, '[rl_collapsible_section', true);    
+      $after = stristr($content, '[rl_collapsible_section');   
+      $content = $before . '[rl_collapsible_section_toggle_button]' . $after;
+    }
+
   }
   return $content;
 }
-add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
+add_filter( 'the_content', 'rl_collapsible_section_the_content_filter' );
