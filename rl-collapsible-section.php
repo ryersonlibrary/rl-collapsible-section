@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Adds the [rl_collapsible_section] shortcode to WordPress.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rl-collapsible-section
- * Version: 0.1.6
+ * Version: 0.1.7
  */
 
 // Include our custom settings page for the plugin
