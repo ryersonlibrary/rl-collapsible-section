@@ -51,15 +51,17 @@ function rl_collapsible_section_shortcode($attrs = [], $content = null, $tag = '
 add_shortcode('rl_collapsible_section', 'rl_collapsible_section_shortcode');
 
 function rl_collapsible_section_toggle_button_shortcode() {
-  $output = '<button class="rl-collapsible-section-toggle-button">Expand / Collapse All</button>';
+  $output = '<div style="text-align: right"><button class="rl-collapsible-section-toggle-button">Expand / Collapse All</button></div>';
   return $output;
 }
 add_shortcode('rl_collapsible_section_toggle_button', 'rl_collapsible_section_toggle_button_shortcode');
 
 function rl_collapsible_section_prepend_toggle_button($content) {
   if ( has_shortcode($content, 'rl_collapsible_section') && !has_shortcode($content, 'rl_collapsible_section_toggle_button') ) {
-    return '[rl_collapsible_section_toggle_button]' . $content;
+    $before = stristr($content, '[rl_collapsible_section', true);    
+    $after = stristr($content, '[rl_collapsible_section');   
+    return $before . '[rl_collapsible_section_toggle_button]' . $after;
   }
   return $content;
 }
-// add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
+add_filter( 'the_content', 'rl_collapsible_section_prepend_toggle_button' );
