@@ -51,7 +51,21 @@ add_shortcode('rl_collapsible_section', 'rl_collapsible_section_shortcode');
 
 // [rl_collapsible_section_toggle_button] shortcode
 function rl_collapsible_section_toggle_button_shortcode() {
-  $output = '<div style="text-align: right"><button class="rl-collapsible-section-toggle-button">Expand / Collapse All</button></div>';
+  // normalize attribute keys, lowercase
+  $atts = array_change_key_case((array)$atts, CASE_LOWER);
+
+  // override default attributes with user attributes
+  $shortcode_atts = shortcode_atts([
+    'align' => 'right',
+    'button-text' => 'Expand / Collapse All'
+  ], $atts, 'rl_collapsible_section_toggle_button');
+
+  $align = $shortcode_atts['align'];
+  $button_text = $shortcode_atts['button-text'];
+
+  $output = "<div style=\"text-align: {$align}\">";
+  $output .= "<button class=\"rl-collapsible-section-toggle-button\">{$button_text}</button>";
+  $output .= '</div>';
   return $output;
 }
 add_shortcode('rl_collapsible_section_toggle_button', 'rl_collapsible_section_toggle_button_shortcode');
