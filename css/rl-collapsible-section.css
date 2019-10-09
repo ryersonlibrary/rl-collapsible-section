@@ -1,25 +1,24 @@
 .rl-collapsible-section-title {
   position: relative;
   text-decoration: underline;
-  color: #EFEFEF;
+
 }
 
 .rl-collapsible-section-title button {
-  background: none;
+  color: #000;
+  background-color: #FFF;
   border: 0;
-  color: #EFEFEF;
   cursor: pointer;
   padding: inherit;
   text-align: left;
   text-decoration: inherit;
   width:100%;
   padding: 1rem 3rem 1rem 2rem;
-  background-color: #0a4e99;
 }
 
-.rl-collapsible-section-title button:hover,
-.rl-collapsible-section-title button:focus {
-  background-color: #7F0C07;
+.rl-collapsible-section-title button:hover {
+  background-color: #004c9b;
+  color: #FFF;
 }
 
 .rl-collapsible-section-button-indicator {
@@ -47,4 +46,16 @@
 
 .rl-collapsed .rl-collapsible-section-content {
   display: none;
+}
+
+.rl-collapsible-section-toggle-button {
+  background: #FFF;
+  border: none;
+  font-weight: 700;
+}
+
+.rl-collapsible-section-toggle-button:hover,
+.rl-collapsible-section-toggle-button:focus {
+  background: #004c9b;
+  color: #FFF;
 }
