@@ -25,7 +25,12 @@
 .rl-collapsible-section-button-indicator {
   position: absolute;
   right: 1rem;
-  top: calc(50% - 1.5rem);
+  top: calc(50% - 0.5em);
+}
+
+.rl-collapsible-section-button-indicator:after {
+  display: block;
+  line-height: 1em;
 }
 
 .rl-collapsible-section-button-indicator:after {
