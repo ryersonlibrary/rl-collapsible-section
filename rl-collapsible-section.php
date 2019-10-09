@@ -19,6 +19,10 @@ add_action( 'wp_enqueue_scripts', 'rl_collapsible_section_register_scripts' );
 
 // [rl_collapsible_section] shortcode
 function rl_collapsible_section_shortcode($atts = [], $content = null) {
+
+  // Flag for determining if this is the first instance of [rl_collapsible_section]
+  static $rl_collapsible_section_first_instance = true;
+
   // normalize attribute keys, lowercase
   $atts = array_change_key_case((array)$atts, CASE_LOWER);
  
@@ -32,6 +36,12 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
   $title = $shortcode_atts['title'];
   $title_tag = $shortcode_atts['title-tag'];
   $collapsed = $shortcode_atts['collapsed'] == 'yes';
+
+  // Forces the first collapsible section to be expanded
+  if ($rl_collapsible_section_first_instance) {
+    $collapsed = false;
+    $rl_collapsible_section_first_instance = false;
+  }
   
   $collapsible_section_classes = '';  
   $aria_expanded = 'true';
