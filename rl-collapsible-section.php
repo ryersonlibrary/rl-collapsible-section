@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Adds the [rl_collapsible_section] shortcode to WordPress.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rl-collapsible-section
- * Version: 0.1.7
+ * Version: 0.1.8
  */
 
 // Include our custom settings page for the plugin
@@ -52,6 +52,7 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
     $aria_expanded = 'false';
     $collapsible_section_classes = 'rl-collapsed';
   }
+  
 
   $output = "<div class=\"rl-collapsible-section {$collapsible_section_classes}\">";
   $output .= "<{$title_tag} class=\"rl-collapsible-section-title\"><button aria-expanded=\"{$aria_expanded}\">{$title}<span class=\"rl-collapsible-section-button-indicator\"></span></button></{$title_tag}>";
@@ -60,6 +61,11 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
 
   // Flag for determining if this is the first instance of [rl_collapsible_section]
   $rl_collapsible_section_first_instance = false;
+
+  if ( defined( 'RL_IS_PB_EXPORT' ) ) {
+    $output = "<{$title_tag}>{$title}</{$title_tag}>";
+    $output .= "<p>{$content}</p>";
+  }
 
   return do_shortcode($output);
 }
@@ -92,10 +98,10 @@ function rl_collapsible_section_the_content_filter($content) {
     // Enqueue styles and scripts only if the shortcode exists
     wp_enqueue_script( 'rl-collapsible-section-js' );
     wp_enqueue_style( 'rl-collapsible-section-style' );
-
+    
     // Check if the toggle button is manually placed in the content,
     // if not prepend it to the first instance of [rl_collapsible_section]
-    if ( !has_shortcode($content, 'rl_collapsible_section_toggle_button') ) {
+    if ( !has_shortcode($content, 'rl_collapsible_section_toggle_button') && !defined( 'RL_IS_PB_EXPORT' ) ) {
       $before = stristr($content, '[rl_collapsible_section', true);    
       $after = stristr($content, '[rl_collapsible_section');   
       $content = $before . '[rl_collapsible_section_toggle_button]' . $after;
@@ -105,3 +111,8 @@ function rl_collapsible_section_the_content_filter($content) {
   return $content;
 }
 add_filter( 'the_content', 'rl_collapsible_section_the_content_filter' );
+
+// Pressbooks export compatability
+add_action( 'pb_pre_export', function() {
+  define( 'RL_IS_PB_EXPORT', true );
+});
