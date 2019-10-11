@@ -114,5 +114,7 @@ add_filter( 'the_content', 'rl_collapsible_section_the_content_filter' );
 
 // Pressbooks export compatability
 add_action( 'pb_pre_export', function() {
-  define( 'RL_IS_PB_EXPORT', true );
+  if ( !defined( 'RL_IS_PB_EXPORT' ) ) {
+    define( 'RL_IS_PB_EXPORT', true );
+  }
 });
