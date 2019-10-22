@@ -16,7 +16,8 @@
   padding: 1rem 3rem 1rem 2rem;
 }
 
-.rl-collapsible-section-title button:hover {
+.rl-collapsible-section-title button:hover,
+.rl-collapsible-section-title button:focus {
   background-color: #004c9b;
   color: #FFF;
 }
