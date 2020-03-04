@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Adds the [rl_collapsible_section] shortcode to WordPress.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rl-collapsible-section
- * Version: 0.1.9
+ * Version: 0.1.10
  */
 
 // Include our custom settings page for the plugin
@@ -72,7 +72,7 @@ function rl_collapsible_section_shortcode($atts = [], $content = null) {
 add_shortcode('rl_collapsible_section', 'rl_collapsible_section_shortcode');
 
 // [rl_collapsible_section_toggle_button] shortcode
-function rl_collapsible_section_toggle_button_shortcode() {
+function rl_collapsible_section_toggle_button_shortcode($atts = []) {
   // normalize attribute keys, lowercase
   $atts = array_change_key_case((array)$atts, CASE_LOWER);
 
